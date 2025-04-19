@@ -1,6 +1,8 @@
 <img width="400" src="https://github.com/user-attachments/assets/44bac428-01bb-4fe9-9d85-96cba7698bee" alt="Tor Logo with the onion and a crosshair on it"/>
 
-# Threat Hunt Report: Unauthorized TOR Usage
+# Threat Hunt Report: Investigation of Unauthorized Tor Browser Usage on Employee Device
+
+This report documents the investigation process and findings regarding the use of the Tor Browser by the user "Jondie_86" on the device named "jondie-vm." The investigation utilized multiple data sources, including DeviceFileEvents, DeviceProcessEvents, and DeviceNetworkEvents tables, to track file downloads, process executions, and network connections related to Tor Browser activity.
 - [Scenario Creation](https://github.com/Jondie12/threat-hunting-scenario-tor-/blob/main/threat-hunting-scenario-tor-event-creation.md)
 
 ## Platforms and Languages Leveraged
@@ -23,21 +25,23 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ## Steps Taken
 
-### 1. Searched the `DeviceFileEvents` Table
+## Step 1: Identification of Tor-Related Files Download and Creation
 
-Searched for any file that had the string "tor" in it and discovered what looks like the user "employee" downloaded a TOR installer, did something that resulted in many TOR-related files being copied to the desktop, and the creation of a file called `tor-shopping-list.txt` on the desktop at `2024-11-08T22:27:19.7259964Z`. These events began at `2024-11-08T22:14:48.6065231Z`.
-
+- **Action:** Searched the `DeviceFileEvents` table for any files containing the string "tor" on the device "jondie-vm."
+- **Findings:**  
+  - User "Jondie_86" downloaded a Tor Browser installer named `tor-browser-windows-x86_64-portable-14.5.exe` in the Downloads folder.  
+  - Multiple Tor-related files were copied to the desktop, including `tor.exe`, license files, and shortcuts.  
+  - A file named `tor-shopping-list.txt` was created on the desktop and in the Documents folder.  
+- **Event Start Time:** 2025-04-18T11:00:58.2970376Z  
 **Query used to locate events:**
 
 ```kql
-DeviceFileEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where InitiatingProcessAccountName == "employee"  
-| where FileName contains "tor"  
-| where Timestamp >= datetime(2024-11-08T22:14:48.6065231Z)  
-| order by Timestamp desc  
+| where FileName startswith "tor"
+| where DeviceName == "jondie-vm"
+| where Timestamp >= datetime(2025-04-18T11:00:58.2970376Z)
+| order by Timestamp desc
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
-```
+
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
 
 ---
