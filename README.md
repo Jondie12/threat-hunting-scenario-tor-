@@ -39,12 +39,13 @@ This step confirmed the presence and creation of Tor Browser-related files on th
 **Query used to locate events:**
 
 ```kql
+DeviceFileEvents
 | where FileName startswith "tor"
 | where DeviceName == "jondie-vm"
 | where Timestamp >= datetime(2025-04-18T11:00:58.2970376Z)
 | order by Timestamp desc
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
-
+```
 <img width="1212" alt="image" src="https://github.com/user-attachments/assets/71402e84-8767-44f8-908c-1805be31122d">
 
 ---
@@ -63,7 +64,6 @@ This step confirmed that the Tor Browser was installed silently by the user, whi
 **Query used to locate event:**
 
 ```kql
-
 DeviceProcessEvents
 | where DeviceName == "jondie-vm"
 | where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.5.exe"
@@ -81,8 +81,8 @@ This step verified that the Tor Browser was actively used by the employee, not j
 - **Action:** Searched the `DeviceProcessEvents` table for execution of Tor-related processes such as `tor.exe`, `firefox.exe` (Tor Browser’s Firefox), and `tor-browser.exe`.  
 - **Findings:**  
 - User "Jondie_86" launched the Tor Browser at 2025-04-18T11:05:56.0783815Z.  
-- Multiple instances of Firefox and Tor processes were spawned shortly after.  
-- **Sample Query Used:**
+- Multiple instances of Firefox and Tor processes were spawned shortly after.
+  
 **Query used to locate events:**
 
 ```kql
