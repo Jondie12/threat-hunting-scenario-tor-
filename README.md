@@ -47,7 +47,7 @@ DeviceFileEvents
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName
 ```
 <img width="1429" alt="image" src="https://github.com/user-attachments/assets/133ad343-f744-40b1-9616-3644deda4cb7" />
--downloaded excel copy from MDE
+- [downloaded excel copy from MDE]
 
 
 ---
@@ -72,7 +72,7 @@ DeviceProcessEvents
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 ```
 <img width="1424" alt="image" src="https://github.com/user-attachments/assets/92c36ca6-24a7-431c-961e-7a3897a88623" />
--downloaded excel copy from MDE
+- [downloaded excel copy from MDE]
 
 ---
 
@@ -95,7 +95,8 @@ DeviceProcessEvents
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 | order by Timestamp desc
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
+<img width="1754" alt="image" src="https://github.com/user-attachments/assets/fc2fb482-c3a6-45c6-92f9-00bf558c70c6" />
+- [downloaded excel copy from MDE]
 
 ---
 
@@ -120,7 +121,8 @@ DeviceNetworkEvents
 | project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath
 text
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+<img width="1706" alt="image" src="https://github.com/user-attachments/assets/5dee0a54-faf3-487d-a3b1-ce01e802db09" />
+- [downloaded excel copy from MDE]
 
 ---
 
